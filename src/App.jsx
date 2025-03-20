@@ -1,14 +1,17 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is included
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import logo1 from './assets/logo3.png' 
-import Whatsapp from './assets/whatsapp.png' 
-import telegram from './assets/telegram.png' 
-import phone from './assets/phone.png' 
-import mainlogo from './assets/mainlogo.png' 
 
+import logo1 from './assets/logo3.png';
+import Whatsapp from './assets/whatsapp.png';
+import telegram from './assets/telegram.png';
+import phone from './assets/phone.png';
+import mainlogo from './assets/mainlogo.png';
 
 function App() {
   const formik = useFormik({
@@ -24,25 +27,41 @@ function App() {
         .matches(/^[0-9]{10}$/, 'Invalid mobile number')
         .required('Mobile number is required'),
     }),
-    onSubmit: async (values) => {
-      console.log("value =>", values);
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      try {
+        const response = await axios.post(
+          'https://kunal-p9c0.onrender.com/api/users/register',
+          {
+            name: values.name,
+            number: values.mobileNumber, // Ensure key name matches backend
+          }
+        );
+
+        toast.success(response.data.message || 'User registered successfully!');
+
+        resetForm(); // Reset form after successful submission
+      } catch (error) {
+        toast.error(
+          error.response?.data?.message || 'Something went wrong. Please try again.'
+        );
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
   return (
     <>
+      <ToastContainer position="top-center" autoClose={3000} />
       <div className="signup-container">
         <div className="upper-section flex-column d-flex align-items-center">
-          <img className='mt-1' src={mainlogo} alt="" width={350} style={{zIndex: 30}}/>
-            <img className='mb-4' src={logo1} alt="" height={240} style={{zIndex: 30}}/>
+          <img className="mt-1" src={mainlogo} alt="" width={350} style={{ zIndex: 30 }} />
+          <img className="mb-4" src={logo1} alt="" height={240} style={{ zIndex: 30 }} />
         </div>
         <div className="w-100 d-flex flex-column align-items-center" style={{ position: 'absolute' }}>
           <div className="card signup-card p-4" style={{ width: '400px' }}>
-            <div className="text-center">
-              {/* <h3>Prediction</h3> */}
-            </div>
+            <div className="text-center"></div>
             <Form onSubmit={formik.handleSubmit}>
-              
               {/* Name Field */}
               <FormGroup className="mb-3">
                 <Label for="name">Name</Label>
@@ -81,14 +100,27 @@ function App() {
               </FormGroup>
 
               {/* Submit Button */}
-              <Button type="submit" color="primary" className="w-100">
-                Contact Us
+              <Button type="submit" color="primary" className="w-100" disabled={formik.isSubmitting}>
+                {formik.isSubmitting ? 'Submitting...' : 'Contact Us'}
               </Button>
-              <div className='d-flex mt-3' style={{justifyContent: 'space-evenly'}}>
-                <img className='' src={Whatsapp} alt="" height={50}/>
-                <img className='' src={telegram} alt="" height={50}/>
-                <img className='' src={phone} alt="" height={50}/>
+
+              <div className="d-flex mt-3" style={{ justifyContent: 'space-evenly' }}>
+                {/* WhatsApp */}
+                <a href="https://wa.me/9834911615" target="_blank" rel="noopener noreferrer">
+                  <img src={Whatsapp} alt="WhatsApp" height={50} />
+                </a>
+                            
+                {/* Telegram */}
+                <a href="https://t.me/9834911615" target="_blank" rel="noopener noreferrer">
+                  <img src={telegram} alt="Telegram" height={50} />
+                </a>
+                            
+                {/* Phone Call */}
+                <a href="tel:9834911615">
+                  <img src={phone} alt="Call" height={50} />
+                </a>
               </div>
+
             </Form>
           </div>
         </div>
