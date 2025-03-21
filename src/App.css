@@ -1,23 +1,7 @@
 /* Main container that covers the full screen height */
 .signup-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensures it fills the full screen height */
-  justify-content: center; /* Centers vertically */
-  align-items: center; /* Centers horizontally */
-}
-
-.upper-section {
-  background: linear-gradient(135deg, #d4fc79, #96e6a1); /* Blue background */
-  height: 50vh; /* Keep this if you want a top section */
-  width: 100%; /* Ensure it covers the full width */
-  border-radius: 0px 0px 20px 20px;
-}
-
-.below-section {
-  background-color: #ffff;
-  height: 50vh; /* Keep this if you want a bottom section */
-  width: 100%; /* Ensure it covers the full width */
+  background: linear-gradient(135deg, #d4fc79, #96e6a1); 
+  height: 100vh;
 }
 
 /* The signup card */

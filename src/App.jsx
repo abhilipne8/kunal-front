@@ -54,7 +54,7 @@ function App() {
     <>
       <ToastContainer position="top-center" autoClose={3000} />
       <div className="signup-container">
-        <div className="upper-section flex-column d-flex align-items-center">
+        <div className='d-flex justify-content-center flex-column align-items-center'>
           <img className="mt-1" src={mainlogo} alt="" width={350} style={{ zIndex: 30 }} />
           <img className="mb-4" src={logo1} alt="" height={240} style={{ zIndex: 30 }} />
         </div>
@@ -124,7 +124,6 @@ function App() {
             </Form>
           </div>
         </div>
-        <div className="below-section"></div>
       </div>
     </>
   );
