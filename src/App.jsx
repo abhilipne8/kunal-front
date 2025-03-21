@@ -30,7 +30,7 @@ function App() {
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         const response = await axios.post(
-          `http://13.60.11.86:5000/api/users/register`,
+          `https://kunal-back.onrender.com/api/users/register`,
           {
             name: values.name,
             number: values.mobileNumber, // Ensure key name matches backend
