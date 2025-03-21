@@ -30,7 +30,7 @@ function App() {
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         const response = await axios.post(
-          'https://kunal-p9c0.onrender.com/api/users/register',
+          `http://13.60.11.86:5000/api/users/register`,
           {
             name: values.name,
             number: values.mobileNumber, // Ensure key name matches backend
@@ -109,12 +109,12 @@ function App() {
                 <a href="https://wa.me/9834911615" target="_blank" rel="noopener noreferrer">
                   <img src={Whatsapp} alt="WhatsApp" height={50} />
                 </a>
-                            
+
                 {/* Telegram */}
                 <a href="https://t.me/9834911615" target="_blank" rel="noopener noreferrer">
                   <img src={telegram} alt="Telegram" height={50} />
                 </a>
-                            
+
                 {/* Phone Call */}
                 <a href="tel:9834911615">
                   <img src={phone} alt="Call" height={50} />
