@@ -30,7 +30,7 @@ function App() {
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         const response = await axios.post(
-          `https://api.cricketanalysiss.in/api/users/register`,
+          `https://api.cricketanalysiss.in/api/api/users/register`,
           {
             name: values.name,
             number: values.mobileNumber, // Ensure key name matches backend
