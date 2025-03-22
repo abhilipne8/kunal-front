@@ -101,7 +101,7 @@ function App() {
 
               {/* Submit Button */}
               <Button type="submit" color="primary" className="w-100" disabled={formik.isSubmitting}>
-                {formik.isSubmitting ? 'Submitting...' : 'Contact Us'}
+                {formik.isSubmitting ? 'Submitting...' : 'Register'}
               </Button>
 
               <div className="d-flex mt-3" style={{ justifyContent: 'space-evenly' }}>
